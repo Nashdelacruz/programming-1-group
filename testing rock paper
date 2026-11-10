@@ -1,0 +1,115 @@
+#include <iostream>
+#include <conio.h> /
+#include <cctype>  
+
+using namespace std;
+
+
+string getChoiceName(char choice) {
+    switch (choice) {
+    case 'r': return "Rock";
+    case 'p': return "Paper";
+    case 's': return "Scissors";
+    default: return "Invalid";
+    }
+}
+
+int main() {
+    char playAgain = 'y';
+
+    do {
+        int score1 = 0;
+        int score2 = 0;
+
+        system("cls"); 
+        cout << "========================================\n";
+        cout << "      ROCK-PAPER-SCISSORS (2-PLAYER)    \n";
+        cout << "========================================\n";
+        cout << "First player to reach a score of 5 wins!\n";
+        cout << "Controls: [r]ock, [p]aper, [s]cissors\n\n";
+
+      
+        while (score1 < 5 && score2 < 5) {
+            cout << "----------------------------------------\n";
+            cout << "Current Score -> Player 1: " << score1 << " | Player 2: " << score2 << "\n\n";
+
+           
+            char p1_choice;
+            while (true) {
+                cout << "Player 1's turn (Press r, p, or s): ";
+                p1_choice = tolower(_getch()); 
+                cout << "*\n";
+
+                if (p1_choice == 'r' || p1_choice == 'p' || p1_choice == 's') {
+                    break; 
+                }
+                cout << "[!] Invalid choice. Please press 'r', 'p', or 's'.\n";
+            }
+
+          
+            char p2_choice;
+            while (true) {
+                cout << "Player 2's turn (Press r, p, or s): ";
+                p2_choice = tolower(_getch()); 
+                cout << "*\n\n";
+
+                if (p2_choice == 'r' || p2_choice == 'p' || p2_choice == 's') {
+                    break; 
+                }
+                cout << "[!] Invalid choice. Please press 'r', 'p', or 's'.\n";
+            }
+
+          
+            cout << "Player 1 chose: " << getChoiceName(p1_choice) << "\n";
+            cout << "Player 2 chose: " << getChoiceName(p2_choice) << "\n";
+
+            
+            if (p1_choice == p2_choice) {
+                cout << "Result: It's a tie this round!\n";
+            }
+            else if ((p1_choice == 'r' && p2_choice == 's') ||
+                (p1_choice == 'p' && p2_choice == 'r') ||
+                (p1_choice == 's' && p2_choice == 'p')) {
+                cout << "Result: Player 1 wins this round!\n";
+                score1++;
+            }
+            else {
+                cout << "Result: Player 2 wins this round!\n";
+                score2++;
+            }
+            cout << "\n";
+        }
+
+        
+        cout << "========================================\n";
+        cout << "               GAME OVER                \n";
+        cout << "========================================\n";
+        if (score1 == 5) {
+            cout << "Congratulations! Player 1 won the game with 5 points!\n";
+        }
+        else {
+            cout << "Congratulations! Player 2 won the game with 5 points!\n";
+        }
+
+      
+        cout << "\n========================================\n";
+        cout << "DO YOU WANT TO PLAY AGAIN?\n";
+
+        while (true) {
+            cout << "If YES -> Press 'y' (Ulit Game)\n";
+            cout << "If NO  -> Press 'n' (Exit)\n";
+            cout << "Enter your choice: ";
+            playAgain = tolower(_getch());
+            cout << playAgain << "\n";
+
+            if (playAgain == 'y' || playAgain == 'n') {
+                break;
+            }
+            cout << "[!] Invalid input. Please press 'y' or 'n'.\n\n";
+        }
+
+    } while (playAgain == 'y');
+
+    cout << "\nThank you for playing! Exiting game...\n";
+    return 0;
+}
